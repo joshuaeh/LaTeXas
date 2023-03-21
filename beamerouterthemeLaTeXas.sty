@@ -1,0 +1,71 @@
+\setbeamertemplate{navigation symbols}{}
+
+\RequirePackage{tikz}
+
+% \newlength{\marginedPaperWidth}{\paperwidth - 0.2cm}
+
+% Title Page
+\pgfdeclareimage[width=1.05\paperwidth]{mybackground}{assets/moerdik_dark.png}
+
+\setbeamertemplate{title page}{
+    \vspace{-0.9 cm}
+    \begin{picture}(0,0)
+
+        \put(-30,-163){%
+            \pgfuseimage{mybackground}
+        }
+
+        \put(0,-140){%
+            \begin{minipage}[b][45mm][t]{226mm}
+                \usebeamerfont{title}{\inserttitle\par}
+                \usebeamerfont{subtitle}{\insertsubtitle\par}
+                \vspace{0.3 cm}
+                \usebeamerfont{author}{\insertauthor\par}
+                \usebeamerfont{institute}{\insertinstitute\par}
+                \usebeamerfont{date}{\insertdate\par}
+            \end{minipage}
+        }
+
+        \end{picture}
+
+    }
+
+% Frame title
+\defbeamertemplate*{frametitle}{LaTeXas}[1][]{
+    \vskip-.1cm
+    % burnt orange box
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.1 cm]{frametitle} 
+    \begin{tikzpicture}
+    \useasboundingbox(0,0) rectangle(\the\paperwidth,1.1 cm);
+    % color bar
+    {\usebeamercolor[fg]{frametitle-bg}}
+    \fill[color=frametitle-bg.fg] (0,0) rectangle(\paperwidth,1.1 cm);
+    % logo
+    \hspace{-.5 cm}
+    \includegraphics[width=.23\paperwidth]{assets/logo/UTexas-White.eps}
+    % title
+    \node[anchor= west] at (0 cm,0.5 cm){\usebeamerfont{frametitle}\insertframetitle};
+    \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% footer
+\setbeamertemplate{footline}[text line]{%
+    \leavevmode%
+    \hbox{%
+        % left: author
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+            \usebeamerfont{author in head/foot}\insertauthor
+        \end{beamercolorbox}%
+        % middle: title
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\inserttitle
+        \end{beamercolorbox}%
+        % right: date and page number
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}    
+        \end{beamercolorbox}
+    }%
+    \vskip0pt%
+}
