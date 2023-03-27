@@ -5,26 +5,31 @@
 % \newlength{\marginedPaperWidth}{\paperwidth - 0.2cm}
 
 % Title Page
-\pgfdeclareimage[width=1.05\paperwidth]{mybackground}{assets/moerdik_dark.png}
+\pgfdeclareimage[width=16 cm]{bg_image}{assets/images/moerdik_angle_color.png}  % expanded to ensure no white margin
 
 \setbeamertemplate{title page}{
-    \vspace{-0.9 cm}
-    \begin{picture}(0,0)
+    %\vspace{-0.5 cm}  % shift up to counter header and upper margin
+    \begin{picture}(16 cm,9 cm)(0,0)
 
-        \put(-30,-163){%
-            \pgfuseimage{mybackground}
+        \put(-1 cm,0){%
+            \pgfuseimage{bg_image}
         }
-
-        \put(0,-140){%
-            \begin{minipage}[b][45mm][t]{226mm}
-                \usebeamerfont{title}{\inserttitle\par}
+        
+        \put(0,0.3 cm){%
+            \fboxsep=0pt
+            \colorbox{charcoal}{
+            \begin{minipage}[b][][c]{14 cm} % [position][height][inner-pos]{width}
+            % b - align bottom of text with baseline of minipage
+                \vspace{1 ex}
+                \usebeamerfont{title}\usebeamercolor[fg]{title}{\raggedright \inserttitle\par}
                 \usebeamerfont{subtitle}{\insertsubtitle\par}
                 \vspace{0.3 cm}
                 \usebeamerfont{author}{\insertauthor\par}
-                \usebeamerfont{institute}{\insertinstitute\par}
+                \usebeamerfont{institute}{\textit{\insertinstitute\par}}
                 \usebeamerfont{date}{\insertdate\par}
+                \vspace{1 ex}
             \end{minipage}
-        }
+        }}
 
         \end{picture}
 
@@ -44,28 +49,59 @@
     \hspace{-.5 cm}
     \includegraphics[width=.23\paperwidth]{assets/logo/UTexas-White.eps}
     % title
-    \node[anchor= west] at (0 cm,0.5 cm){\usebeamerfont{frametitle}\insertframetitle};
+    \node[anchor= west] at (0.1 cm,0.5 cm){\usebeamerfont{frametitle}\insertframetitle};
     \end{tikzpicture}
   \end{beamercolorbox}
 }
 
 % footer
-\setbeamertemplate{footline}[text line]{%
-    \leavevmode%
-    \hbox{%
-        % left: author
-        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
-            \usebeamerfont{author in head/foot}\insertauthor
-        \end{beamercolorbox}%
-        % middle: title
-        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-            \usebeamerfont{title in head/foot}\inserttitle
-        \end{beamercolorbox}%
-        % right: date and page number
-        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}    
-        \end{beamercolorbox}
-    }%
-    \vskip0pt%
+% \setbeamertemplate{footline}[text line]{%
+%     \leavevmode%  ensures that we stop adding vertically and add horizontally
+%     \hspace{-1 cm}  % counteracts \hmargin
+%     \hbox{%
+%         % left: author
+%         \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+%             \hspace{2 ex}
+%             \usebeamerfont{author in head/foot}\insertshortauthor
+%         \end{beamercolorbox}%
+%         % middle: title
+%         \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+%             \usebeamerfont{title in head/foot}\inserttitle
+%         \end{beamercolorbox}%
+%         % right: date and page number
+%         \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+%             \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+%             \insertframenumber{} / \inserttotalframenumber
+%             \hspace*{4ex}    
+%         \end{beamercolorbox}
+%     }%
+%     \vskip0pt%
+% }
+
+\setbeamertemplate{footline}{}
+
+\setbeamertemplate{logo}{%
+    \usebeamercolor[fg]{footline}%
+    \usebeamerfont{footline}%
+    \insertframenumber{}%
+
 }
+
+% references
+
+% footnotes
+\setbeamertemplate{footnote}{ % <---
+  \makebox[1em][l]{\insertfootnotemark}%
+  \begin{minipage}{\dimexpr\linewidth-1em}
+    \usebeamerfont{footnote} \linespread{0.84} \insertfootnotetext
+  \end{minipage}\vskip 0pt 
+}
+
+% navigation symbols
+\setbeamertemplate{navigation symbols}{
+% \insertframenavigationsymbol 
+% \insertsectionnavigationsymbol 
+% \insertbackfindforwardnavigationsymbol
+} 
+
+
